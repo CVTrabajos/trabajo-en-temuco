@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trabajo en Temuco | Ofertas Laborales Actualizadas</title>
-<meta name="description" content="Portal de ofertas de empleo y vacantes laborales en la Ciudad de Temuco y Región de La Araucanía.">
+<meta name="description" content="Portal de ofertas de empleo y vacantes laborales en Temuco y la Región de La Araucanía.">
 <style>
 :root{--primary:#1565D8;--bg:#F4F6F9;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0}
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -32,8 +32,8 @@ header p{color:#94A3B8;font-size:.95rem}
 .card-top{display:flex;justify-content:space-between;align-items:center}
 .cat-tag{font-size:.75rem;font-weight:700;color:#fff;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:.4px}
 .job-date{font-size:.78rem;color:var(--muted);font-weight:600}
-.job-title{font-size:1.05rem;font-weight:700;line-height:1.35}
-.job-company{font-size:.88rem;color:var(--muted);display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.job-title{font-size:1.05rem;font-weight:700;line-height:1.35;color:#0F172A}
+.job-company{font-size:.88rem;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .postular-btn{display:block;width:100%;text-align:center;background:#1D4ED8;color:#fff;text-decoration:none;font-weight:700;font-size:.92rem;padding:12px;border-radius:10px;margin-top:4px}
 .postular-btn:hover{background:#1E40AF}
 .postular-btn.off{background:#94A3B8;cursor:not-allowed}
@@ -48,7 +48,7 @@ footer{max-width:680px;margin:40px auto 0;text-align:center;padding:0 20px;font-
 <body>
 <header>
   <div class="header-content">
-    <div class="badge-top">CIUDAD DE TEMUCO Y REGIÓN DE LA ARAUCANÍA</div>
+    <div class="badge-top">TEMUCO Y REGIÓN DE LA ARAUCANÍA</div>
     <h1>Trabajo en Temuco</h1>
     <p>Recuerda tener precaución en tus postulaciones</p>
   </div>
@@ -82,7 +82,7 @@ footer{max-width:680px;margin:40px auto 0;text-align:center;padding:0 20px;font-
 
   <div class="stats-bar">
     <span id="jobCount">Cargando vacantes...</span>
-    <span>📍 Ciudad de Temuco, Región de La Araucanía</span>
+    <span>Región de La Araucanía</span>
   </div>
 
   <div class="job-list" id="jobList">
@@ -99,7 +99,7 @@ footer{max-width:680px;margin:40px auto 0;text-align:center;padding:0 20px;font-
 </main>
 
 <script>
-const CACHE_KEY = 'ofertas_temuco_v1';
+const CACHE_KEY = 'ofertas_temuco_v3';
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-YSOgoflQI_9RGN3e93zTTt7HG3QLY23Mi2WietPJjQ3-xhY2cKiFq87fDkwrOOa1/exec";
 const CIUDAD_NOMBRE = "Temuco";
 const REGION_NOMBRE = "Región de La Araucanía";
@@ -112,19 +112,25 @@ function normalizeStr(str){
   return String(str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
 }
 
-function formatFecha(f){
+// Formateo de fecha limpia estilo Santiago (ej: 28/10)
+function formatFechaCorta(f){
   if (!f) return '';
   const s = String(f).trim();
-  if (s.includes('GMT') || s.includes('00:00:00')) {
+  if (s.includes('GMT') || s.includes('00:00:00') || s.includes('T')) {
     const d = new Date(s);
     if (!isNaN(d.getTime())) {
       const dia = String(d.getDate()).padStart(2, '0');
       const mes = String(d.getMonth() + 1).padStart(2, '0');
-      const anio = d.getFullYear();
-      return `${dia}/${mes}/${anio}`;
+      return `${dia}/${mes}`;
     }
   }
-  return s.split('T')[0];
+  const p = s.split(/[/.-]/);
+  if (p.length >= 2) {
+    const dia = String(p[0]).padStart(2, '0');
+    const mes = String(p[1]).padStart(2, '0');
+    return `${dia}/${mes}`;
+  }
+  return s;
 }
 
 const $ = id => document.getElementById(id);
@@ -148,26 +154,30 @@ function renderJobs(){
     let url = String(j.url || '').trim();
     let cargo = String(j.cargo || '').trim();
     let empresa = String(j.empresa || '').trim();
-    
-    // Auto-corrección si URL viene en empresa o cargo
+    let cat = String(j.cat || '').trim();
+    let fecha = String(j.fecha || '').trim();
+
+    // 1. Auto-recuperación si URL viene en empresa
     if (!url.startsWith('http') && empresa.startsWith('http')) {
       url = empresa;
       empresa = 'Empresa Verificada';
     }
-    if (!url.startsWith('http') && cargo.startsWith('http')) {
-      url = cargo;
-      cargo = 'Oferta de Empleo';
-    }
-    
-    // Limpieza de cargo
-    cargo = cargo.replace(/\(.*?[\$].*?\)/g, '').split('|')[0].trim();
-    const ok = url.startsWith('http');
-    const fechaLimpia = formatFecha(j.fecha);
 
+    // 2. Si la categoría viene desfasada como fecha
+    if (cat.includes('GMT') || cat.includes('00:00:00') || /\d{4}/i.test(cat)) {
+      if (!fecha) fecha = cat;
+      cat = 'Otros';
+    }
+
+    const ok = url.startsWith('http');
+    const fechaCorta = formatFechaCorta(fecha);
+
+    // Muestra el Título Completo Rico exactamente como en Santiago:
+    // Cargo (Sueldo) | Empresa | Comuna
     return `<div class="job-card">
-      <div class="card-top"><span class="cat-tag" style="background:${colorOf(j.cat)}">${esc(j.cat || 'Otros')}</span><span class="job-date">${esc(fechaLimpia)}</span></div>
+      <div class="card-top"><span class="cat-tag" style="background:${colorOf(cat)}">${esc(cat || 'Otros')}</span><span class="job-date">${esc(fechaCorta)}</span></div>
       <div class="job-title">${esc(cargo)}</div>
-      <div class="job-company"><span>🏢</span> ${esc(empresa || 'Empresa confidencial')} <span style="margin-left:6px;color:#64748B;">• 📍 Ciudad de ${esc(CIUDAD_NOMBRE)}</span></div>
+      <div class="job-company"><span>🏢</span> ${esc(empresa || 'Empresa confidencial')}</div>
       ${ok ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="postular-btn">POSTULAR AL EMPLEO →</a>` : `<span class="postular-btn off">POSTULACIÓN NO DISPONIBLE</span>`}
     </div>`;
   }).join('');
