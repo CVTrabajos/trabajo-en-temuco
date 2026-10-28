@@ -1,27 +1,22 @@
 name: Actualizar ofertas
 
-
 on:
   schedule:
     - cron: '*/15 * * * *'
   workflow_dispatch:
 
-
 permissions:
   contents: write
-
 
 concurrency:
   group: actualizar-ofertas
   cancel-in-progress: false
-
 
 jobs:
   actualizar:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
 
       - name: Descargar ofertas desde Apps Script
         env:
@@ -41,7 +36,6 @@ jobs:
           print("Ofertas guardadas:", len(d))
           EOF
           rm -f nuevo.json
-
 
       - name: Guardar cambios
         run: |
