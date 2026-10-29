@@ -9,31 +9,32 @@
 :root{--primary:#1565D8;--bg:#F4F6F9;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0}
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 body{background:var(--bg);color:var(--text);line-height:1.5;padding-bottom:60px}
-header{background:linear-gradient(135deg,#0F172A 0%,#1E3A8A 100%);color:#fff;padding:30px 20px 24px;text-align:center}
-.header-content{max-width:680px;margin:0 auto}
-.badge-top{display:inline-block;background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;margin-bottom:10px;letter-spacing:.5px}
-header h1{font-size:1.8rem;font-weight:700;margin-bottom:6px}
-header p{color:#94A3B8;font-size:.95rem}
+header{background:linear-gradient(135deg,#0F172A 0%,#1E3A8A 100%);color:#fff;padding:26px 20px 22px;text-align:center}
+.header-content{max-width:680px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+.header-top-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.badge-top{display:inline-block;background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;letter-spacing:.5px}
+.ig-button{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);color:#fff;text-decoration:none;padding:5px 14px;border-radius:20px;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.3);transition:all .2s ease}
+.ig-button:hover{background:rgba(255,255,255,.3);transform:scale(1.02)}
+header h1{font-size:1.8rem;font-weight:700;margin-bottom:4px}
+header p{color:#94A3B8;font-size:.92rem}
 .container{max-width:780px;margin:-18px auto 0;padding:0 16px}
-.search-box{background:var(--card);padding:12px 20px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px;border:1px solid var(--border)}
+.search-box{background:var(--card);padding:12px 16px;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px;border:1px solid var(--border)}
 .search-box input{width:100%;border:none;outline:none;font-size:1rem;color:var(--text);background:transparent}
-.sec-title{font-size:1.05rem;font-weight:700;margin:18px 4px 0}
-.sec-sub{font-size:.85rem;color:var(--muted);margin:2px 4px 0}
 .filters-wrapper{display:flex;align-items:center;gap:6px;margin:12px 0 8px}
 .filters-scroll{display:flex;gap:8px;overflow-x:auto;padding:6px 0;scrollbar-width:none;scroll-behavior:smooth;flex:1}
 .filters-scroll::-webkit-scrollbar{display:none}
 .scroll-arrow{background:#fff;border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.25rem;cursor:pointer;flex-shrink:0;user-select:none}
 .scroll-arrow:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
-.filter-btn{background:#fff;border:1px solid #CBD5E1;padding:8px 14px;border-radius:20px;font-size:.82rem;font-weight:600;color:#334155;white-space:nowrap;cursor:pointer;flex-shrink:0}
-.filter-btn.active{background:#1D6FE9;color:#fff;border-color:#1D6FE9}
-.stats-bar{display:flex;justify-content:space-between;margin:14px 4px 16px;font-size:.85rem;color:var(--muted);font-weight:500}
+.filter-btn{background:#fff;border:1px solid var(--border);padding:8px 14px;border-radius:20px;font-size:.82rem;font-weight:600;color:var(--muted);white-space:nowrap;cursor:pointer;flex-shrink:0}
+.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.stats-bar{display:flex;justify-content:space-between;margin:10px 4px 16px;font-size:.85rem;color:var(--muted);font-weight:500}
 .job-list{display:flex;flex-direction:column;gap:12px}
 .job-card{background:var(--card);border-radius:14px;padding:16px 18px;border:1px solid var(--border);box-shadow:0 2px 6px rgba(0,0,0,.03);display:flex;flex-direction:column;gap:10px}
 .card-top{display:flex;justify-content:space-between;align-items:center}
 .cat-tag{font-size:.75rem;font-weight:700;color:#fff;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:.4px}
 .job-date{font-size:.78rem;color:var(--muted);font-weight:600}
-.job-title{font-size:1.05rem;font-weight:700;line-height:1.35;color:#0F172A}
-.job-company{font-size:.88rem;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.job-title{font-size:1.05rem;font-weight:700;line-height:1.35}
+.job-company{font-size:.88rem;color:var(--muted)}
 .postular-btn{display:block;width:100%;text-align:center;background:#1D4ED8;color:#fff;text-decoration:none;font-weight:700;font-size:.92rem;padding:12px;border-radius:10px;margin-top:4px}
 .postular-btn:hover{background:#1E40AF}
 .postular-btn.off{background:#94A3B8;cursor:not-allowed}
@@ -48,21 +49,22 @@ footer{max-width:680px;margin:40px auto 0;text-align:center;padding:0 20px;font-
 <body>
 <header>
   <div class="header-content">
-    <div class="badge-top">TEMUCO Y REGIÓN DE LA ARAUCANÍA</div>
+    <div class="header-top-row">
+      <span class="badge-top">TEMUCO Y REGIÓN DE LA ARAUCANÍA</span>
+      <a href="https://instagram.com/trabajo_en_temuco" target="_blank" rel="noopener noreferrer" class="ig-button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        @trabajo_en_temuco
+      </a>
+    </div>
     <h1>Trabajo en Temuco</h1>
     <p>Recuerda tener precaución en tus postulaciones</p>
   </div>
 </header>
-
 <main class="container">
   <div class="search-box">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     <input type="text" id="searchInput" placeholder="Buscar por cargo, empresa o palabra clave...">
   </div>
-
-  <div class="sec-title">Categorías de empleo</div>
-  <div class="sec-sub">Filtra las ofertas según tu rubro o área laboral</div>
-
   <div class="filters-wrapper">
     <button class="scroll-arrow" id="scrollLeft" aria-label="Izquierda">‹</button>
     <div class="filters-scroll" id="filtersScroll">
@@ -79,106 +81,58 @@ footer{max-width:680px;margin:40px auto 0;text-align:center;padding:0 20px;font-
     </div>
     <button class="scroll-arrow" id="scrollRight" aria-label="Derecha">›</button>
   </div>
-
-  <div class="stats-bar">
-    <span id="jobCount">Cargando vacantes...</span>
-    <span>Región de La Araucanía</span>
-  </div>
-
+  <div class="stats-bar"><span id="jobCount">Cargando vacantes...</span><span>Región de La Araucanía</span></div>
   <div class="job-list" id="jobList">
     <div class="job-card sk"><i style="height:22px;width:35%"></i><i style="height:20px;width:80%"></i><i style="height:16px;width:50%"></i><i style="height:44px"></i></div>
     <div class="job-card sk"><i style="height:22px;width:30%"></i><i style="height:20px;width:70%"></i><i style="height:16px;width:45%"></i><i style="height:44px"></i></div>
-    <div class="job-card sk"><i style="height:22px;width:40%"></i><i style="height:20px;width:75%"></i><i style="height:16px;width:55%"></i><i style="height:44px"></i></div>
   </div>
   <div class="no-results" id="noResults" style="display:none"><p>No se encontraron vacantes para este criterio de búsqueda.</p></div>
-
   <footer>
     <div class="disclaimer"><strong>⚠️ Información Importante:</strong> Nosotros no gestionamos postulaciones, no recibimos currículums ni representamos a las empresas contratantes. Nunca transfieras dinero para participar en procesos de selección.</div>
     <p>© Trabajo en Temuco • Comunidad de empleo regional</p>
   </footer>
 </main>
-
 <script>
-const CACHE_KEY = 'ofertas_temuco_v3';
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-YSOgoflQI_9RGN3e93zTTt7HG3QLY23Mi2WietPJjQ3-xhY2cKiFq87fDkwrOOa1/exec";
 const CIUDAD_NOMBRE = "Temuco";
-const REGION_NOMBRE = "Región de La Araucanía";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWV5L3EEt95Z2UfVejkGwRhudEBIzeyvlRIZK0oso5Bi-tx8rjHGPB9-WmonSJT_Wh/exec";
+const CACHE_KEY = "ofertas_temuco_v1";
+const INSTAGRAM_USER = "@trabajo_en_temuco";
 
-const CAT_COLORS = {comercial:'#FF8A00',ventas:'#FF8A00',retail:'#FF8A00',tecnico:'#00CED1',técnico:'#00CED1',mantenimiento:'#00CED1',mantencion:'#00CED1',logistica:'#D4AC0D',logística:'#D4AC0D',bodega:'#D4AC0D',administrativo:'#1565D8',oficina:'#1565D8',rrhh:'#1565D8',salud:'#2EAF62',tens:'#2EAF62',construccion:'#FF0000',construcción:'#FF0000',educacion:'#9C27B0',educación:'#9C27B0',gastronomia:'#795548',gastronomía:'#795548',cocina:'#795548',otros:'#999999'};
+const CAT_COLORS = {
+  comercial:'#FF8A00',ventas:'#FF8A00',retail:'#FF8A00',
+  tecnico:'#00CED1',técnico:'#00CED1',mantenimiento:'#00CED1',mantencion:'#00CED1',
+  logistica:'#D4AC0D',logística:'#D4AC0D',bodega:'#D4AC0D',
+  administrativo:'#1565D8',oficina:'#1565D8',rrhh:'#1565D8',
+  salud:'#2EAF62',tens:'#2EAF62',
+  construccion:'#FF0000',construcción:'#FF0000',
+  educacion:'#9C27B0',educación:'#9C27B0',
+  gastronomia:'#795548',gastronomía:'#795548',cocina:'#795548',
+  otros:'#999999'
+};
 
 let jobsData = [], activeCategory = 'all', searchQuery = '';
-
-function normalizeStr(str){
-  return String(str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
-}
-
-// Formateo de fecha limpia estilo Santiago (ej: 28/10)
-function formatFechaCorta(f){
-  if (!f) return '';
-  const s = String(f).trim();
-  if (s.includes('GMT') || s.includes('00:00:00') || s.includes('T')) {
-    const d = new Date(s);
-    if (!isNaN(d.getTime())) {
-      const dia = String(d.getDate()).padStart(2, '0');
-      const mes = String(d.getMonth() + 1).padStart(2, '0');
-      return `${dia}/${mes}`;
-    }
-  }
-  const p = s.split(/[/.-]/);
-  if (p.length >= 2) {
-    const dia = String(p[0]).padStart(2, '0');
-    const mes = String(p[1]).padStart(2, '0');
-    return `${dia}/${mes}`;
-  }
-  return s;
-}
-
 const $ = id => document.getElementById(id);
 
-function esc(s){return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function esc(s){return String(s == null ? '' : s).replace(/[<>"']/g, c => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function colorOf(cat){const l = String(cat || '').toLowerCase(); for (const [k,v] of Object.entries(CAT_COLORS)) if (l.includes(k)) return v; return '#999999';}
 
 function renderJobs(){
-  const q = normalizeStr(searchQuery), cat = normalizeStr(activeCategory);
+  const q = searchQuery, cat = activeCategory.toLowerCase();
   const list = jobsData.filter(j => {
-    const catTxt = normalizeStr(j.cat);
-    const txt = normalizeStr(`${j.cargo || ''} ${j.empresa || ''} ${j.cat || ''}`);
-    if (!txt.includes(q)) return false;
-    if (cat !== 'all' && !catTxt.includes(cat)) return false;
-    return true;
+    const catTxt = String(j.cat || '').toLowerCase();
+    const txt = `${j.cargo || ''} ${j.empresa || ''} ${catTxt}`.toLowerCase();
+    return txt.includes(q) && (cat === 'all' || catTxt.includes(cat));
   });
   $('jobCount').textContent = `${list.length} vacante${list.length === 1 ? '' : 's'} disponible${list.length === 1 ? '' : 's'}`;
   if (!list.length){ $('jobList').innerHTML = ''; $('noResults').style.display = 'block'; return; }
   $('noResults').style.display = 'none';
   $('jobList').innerHTML = list.map(j => {
-    let url = String(j.url || '').trim();
-    let cargo = String(j.cargo || '').trim();
-    let empresa = String(j.empresa || '').trim();
-    let cat = String(j.cat || '').trim();
-    let fecha = String(j.fecha || '').trim();
-
-    // 1. Auto-recuperación si URL viene en empresa
-    if (!url.startsWith('http') && empresa.startsWith('http')) {
-      url = empresa;
-      empresa = 'Empresa Verificada';
-    }
-
-    // 2. Si la categoría viene desfasada como fecha
-    if (cat.includes('GMT') || cat.includes('00:00:00') || /\d{4}/i.test(cat)) {
-      if (!fecha) fecha = cat;
-      cat = 'Otros';
-    }
-
-    const ok = url.startsWith('http');
-    const fechaCorta = formatFechaCorta(fecha);
-
-    // Muestra el Título Completo Rico exactamente como en Santiago:
-    // Cargo (Sueldo) | Empresa | Comuna
+    const ok = j.url && String(j.url).startsWith('http');
     return `<div class="job-card">
-      <div class="card-top"><span class="cat-tag" style="background:${colorOf(cat)}">${esc(cat || 'Otros')}</span><span class="job-date">${esc(fechaCorta)}</span></div>
-      <div class="job-title">${esc(cargo)}</div>
-      <div class="job-company"><span>🏢</span> ${esc(empresa || 'Empresa confidencial')}</div>
-      ${ok ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="postular-btn">POSTULAR AL EMPLEO →</a>` : `<span class="postular-btn off">POSTULACIÓN NO DISPONIBLE</span>`}
+      <div class="card-top"><span class="cat-tag" style="background:${colorOf(j.cat)}">${esc(j.cat)}</span><span class="job-date">${esc(j.fecha)}</span></div>
+      <div class="job-title">${esc(j.cargo)}</div>
+      <div class="job-company"><span>🏢</span> ${esc(j.empresa || 'Empresa confidencial')}</div>
+      ${ok ? `<a href="${esc(j.url)}" target="_blank" rel="noopener noreferrer" class="postular-btn">POSTULAR AL EMPLEO →</a>` : `<span class="postular-btn off">POSTULACIÓN NO DISPONIBLE</span>`}
     </div>`;
   }).join('');
 }
@@ -194,13 +148,11 @@ $('scrollLeft').onclick = () => sc.scrollBy({left:-220,behavior:'smooth'});
 $('scrollRight').onclick = () => sc.scrollBy({left:220,behavior:'smooth'});
 sc.addEventListener('wheel', e => { if (e.deltaY){ e.preventDefault(); sc.scrollLeft += e.deltaY; } }, {passive:false});
 
-// 1) Carga rápida desde caché de navegador
 try {
   const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
   if (Array.isArray(cached) && cached.length){ jobsData = cached; renderJobs(); }
 } catch(e){}
 
-// 2) Doble carga: ofertas.json estático y Apps Script en vivo
 let liveLoaded = false, failed = 0;
 function showError(){
   if (jobsData.length || failed < 2) return;
@@ -208,6 +160,7 @@ function showError(){
   $('noResults').innerHTML = '<p style="color:#DC2626">No se pudieron cargar las ofertas. Recarga la página en unos minutos.</p>';
   $('noResults').style.display = 'block';
 }
+
 function aplicar(data, esLive){
   if (!Array.isArray(data) || !data.length) throw new Error('vacío');
   if (!esLive && liveLoaded) return;
